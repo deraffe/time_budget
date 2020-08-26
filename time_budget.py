@@ -3,6 +3,8 @@ import argparse
 import datetime
 import logging
 
+from durations import Duration
+
 log = logging.getLogger(__name__)
 
 
@@ -10,11 +12,15 @@ def time_budget(
     interval: datetime.timedelta, time_avoided: datetime.timedelta,
     time_frame: datetime.timedelta
 ) -> datetime.timedelta:
-    return datetime.timedelta(days=0)  # TODO
+    count = time_frame / interval
+    budget = time_avoided * count
+    return budget
 
 
 def get_time(time_str: str) -> datetime.timedelta:
-    return datetime.timedelta(days=0)  # TODO
+    dur = Duration(time_str)
+    td = datetime.timedelta(seconds=dur.to_seconds())
+    return td
 
 
 def main():
